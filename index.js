@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
@@ -21,6 +22,10 @@ app.use(express.json());
 //* export all of path routes/auth.js and execute in api/auth
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/events', require('./routes/events'));
+
+app.use('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/index.html'));
+});
 
 //* Define server 
 app.listen(process.env.PORT_NODE, () => {
